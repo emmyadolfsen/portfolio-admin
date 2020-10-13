@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,8 +12,17 @@
 </head>
 
 <body>
+<?php session_start(); ?>
+<?php 
+    if(!isset($_SESSION['username'])) {
+        header("Location: http://www.raggmunkar.se/portfolio/admin/login.php?msg=Logga in");
+    }
+?>
+<div class="d-flex flex-row">
 <h1 class="p-3">Emmy Adolfsén</h1>
-    <h2 id="toggle-courses" class="p-3">Kurser jag läst</h2>
+<button class="btn btn-outline-primary m-4"><a href="http://www.raggmunkar.se/portfolio/admin/logout.php">Logga ut</a></button>
+</div>    
+<h2 id="toggle-courses" class="p-3">Kurser jag läst</h2>
     <article id="courses-read">
 <table class="table m-3 mw-100 bg-light">
   <thead>
@@ -132,6 +142,7 @@
     </form>
 
     </article>
+    
 
 </body>
 <script type="text/javascript" src="js/main.js"></script>

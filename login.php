@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,19 +9,19 @@
     <title>Login</title>
 </head>
 <body>
+<?php session_start(); ?>
     <?php
-    /*
-if (isset($_GET['nouser'])) {
-    $message = "<p class='error'>You have to login..</p>";
+    
+if (isset($_GET['msg'])) {
+    $message = "<p class='alert alert-danger'>Glöm inte att " . $_GET['msg'] . "</p>";
 }
-*/
 
 if (isset($_POST['username'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     if ($username == 'emmy' && $password == 'password') {
-        //$_SESSION['username'] = $username;
+        $_SESSION['username'] = $username;
         header("Location: http://www.raggmunkar.se/portfolio/admin/admin.php");
     } else {
         $message = "<p class='alert alert-danger'>Ooops snubblade du på tangenterna...?</p>";
@@ -31,7 +33,7 @@ if (isset($_POST['username'])) {
          <?php if(isset($message)) {
              echo $message;
          } ?>
-        <form method="post" action="index.php">
+        <form method="post" action="login.php">
             <div class="form-group">
                 <label for="username">Jag</label>
                 <input type="text" name="username" id="username" class="form-control">
