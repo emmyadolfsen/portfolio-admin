@@ -7,7 +7,7 @@ let projectNameInput = document.getElementById('projectname');
 let projectUrlInput = document.getElementById('projecturl');
 let projectdInput = document.getElementById('projectd');
 let projectimgInput = document.getElementById('projectimg');
-
+let addProjectMsg = document.getElementById('add-project');
 
 
 // Händelsehanterare
@@ -23,7 +23,7 @@ function getProjects() {
             data.forEach(object => {                   // Loopa igenom objekten och skriv ut
                 projectsEl.innerHTML +=
                     `
-                    <tr>
+                    <tr id="del${object.id}">
                     <th scope="row" id="${object.id}">${object.id}</th>
                     <td>${object.project_name}</td>
                     <td>${object.project_url}</td>
@@ -41,18 +41,18 @@ function getProjects() {
 
 // Funktion för att radera objekt
 function deleteProject(id) {
+    let newDivEl = document.getElementById('del' + id);
     fetch('http://www.raggmunkar.se/portfolio/rest/myprojects.php?id=' + id, {   // Skicka med id till adress för radering av specifikt objekt
             method: 'DELETE',
         })
-        .then(response => response.json())
-    location.reload()
+        .then(response => response.json().then(newDivEl.innerHTML = '<div class="alert alert-success">Kurs ' + id + ' Raderad!</div>'))
         .catch(error => {
             console.log('Error:', error);
         })
 }
 
 // Funktion för att lägga till objekt
-function addProject() {
+function addProject(event) {
     // Parametrar som hämtas från Variablerna längst upp i filen 
     let projectname = projectNameInput.value;
     let projecturl = projectUrlInput.value;
@@ -60,12 +60,13 @@ function addProject() {
     let projectimg = projectimgInput.value;
     // Variabel för att lägga till objekt i tabell
     let project = { 'project_name': projectname, 'project_url': projecturl, 'project_d': projectd, 'project_img': projectimg };
-
+    event.preventDefault();                                              // Ladda inte om sidan
     fetch('http://www.raggmunkar.se/portfolio/rest/myprojects.php', {    // Skicka med variabeln till adress för skapande av objekt
             method: 'POST',
             body: JSON.stringify(project),
         })
-        .then(response => response.json())
+        .then(response => response.json()
+        .then(addProjectMsg.innerHTML += '<p  class="alert alert-success">Projekt tillagt</p>'))
         .catch(error => {
             console.log('Error:', error);
         })
@@ -83,7 +84,7 @@ function setProject(id) {
         .then(object => {                      // Skriv ut data från objektet för ändring och kör igång funktion för uppdatering vid klick på button
             newProjectDivEl.innerHTML += 
                 `
-            <td id="update-projectid${object[0].id}" name="update-projectid" value="${object[0].id}">${object[0].id}</td>
+            <td>${object[0].id}</td>
             <td><input type="text" id="update-projectname${object[0].id}" name="update-projectname" value="${object[0].project_name}"></td>
             <td><input type="text" id="update-project_url${object[0].id}" name="update-project_url" value="${object[0].project_url}"></td>
             <td><input type="text" id="update-projectd${object[0].id}" name="update-projectd" value="${object[0].project_d}"></td>
@@ -100,6 +101,7 @@ function updateProject(id) {
     let project_url = document.getElementById('update-project_url' + id).value;
     let projectd = document.getElementById('update-projectd' + id).value;
     let projectimg = document.getElementById('update-projectimg' + id).value;
+    let hideDiv = document.getElementById('newProjectDiv' + id);
     // Variabel för att uppdatera objekt i tabell
     let project = { 'id': id, 'project_name': projectname, 'project_url': project_url, 'project_d': projectd, 'project_img': projectimg };
 
@@ -107,8 +109,8 @@ function updateProject(id) {
             method: 'PUT',
             body: JSON.stringify(project),
         })
-        .then(response => response.json())
-    location.reload()
+        .then(response => response.json()
+        .then(hideDiv.innerHTML = '<div class="alert alert-success">Projekt ' + id + ' ändrat!</div>'))
         .catch(error => {
             console.log('Error:', error);
         })

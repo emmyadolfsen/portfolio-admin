@@ -6,9 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Web App</title>
+    <title>Emmys Admin</title>
 </head>
 
 <body>
@@ -31,6 +30,7 @@
       <th scope="col">Universitet</th>
       <th scope="col">Kursnamn</th>
       <th scope="col">År</th>
+      <th scope="col">Kursplan</th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -39,6 +39,7 @@
 </table>
 
     <h3 class="p-3">Lägg till kurs:</h3>
+    <div id="add-course"></div>
     <form class="m-3 p-3 bg-light">
     <div class="form-group">
         <label for="university">Universitet:</label>
@@ -51,6 +52,10 @@
     <div class="form-group">
         <label for="coursedate">År:</label>
         <input type="text" id="coursedate" class="form-control" name="coursedate">
+    </div>
+    <div class="form-group">
+        <label for="syllabus">Kursplan</label>
+        <input type="text" id="syllabus" class="form-control" name="syllabus">
     </div>
         <button type="submit" class="btn btn-dark" id="submitCourse">Lägg Till</button>
     </form>
@@ -77,6 +82,7 @@
     </table>    
 
     <h3 class="p-3">Lägg till jobb:</h3>
+    <div id="add-work"></div>
     <form class="m-3 p-3 bg-light">
     <div class="form-group">
         <label for="workname">Företag:</label>
@@ -120,7 +126,7 @@
 
 
     <h3 class="p-3">Lägg till projekt:</h3>
-
+    <div id="add-project"></div>
     <form class="m-3 p-3 bg-light">
     <div class="form-group">
         <label for="projectname">Projektnamn:</label>
