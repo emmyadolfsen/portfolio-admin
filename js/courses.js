@@ -104,11 +104,11 @@ function updateCourse(id) {
     let coursename = document.getElementById('update-coursename' + id).value;
     let university = document.getElementById('update-university' + id).value;
     let coursedate = document.getElementById('update-coursedate' + id).value;
-    let syllabus = document.getElementById('syllabus' + id).value;
+    let syllabus = document.getElementById('update-syllabus' + id).value;
     let hideDiv = document.getElementById('newDiv' + id);
     // Variabel för att uppdatera objekt i tabell
     let course = { 'id': id, 'course_name': coursename, 'university': university, 'course_date': coursedate, 'syllabus': syllabus };
-                                                    // Ladda inte om
+
     fetch('http://www.raggmunkar.se/portfolio/rest/courses.php?id=' + id, {      // Skicka med variabel till adress för uppdatering av objekt
             method: 'PUT',
             body: JSON.stringify(course),

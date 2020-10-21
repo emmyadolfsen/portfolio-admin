@@ -1,4 +1,9 @@
-
+<?php session_start(); ?>
+<?php 
+    if(!isset($_SESSION['username'])) {
+        header("Location: http://www.raggmunkar.se/portfolio/admin/login.php?msg=Logga in");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,12 +16,7 @@
 </head>
 
 <body>
-<?php session_start(); ?>
-<?php 
-    if(!isset($_SESSION['username'])) {
-        header("Location: http://www.raggmunkar.se/portfolio/admin/login.php?msg=Logga in");
-    }
-?>
+
 <div class="d-flex flex-row">
 <h1 class="p-3">Emmy Adolfsén</h1>
 <button class="btn btn-outline-primary m-4"><a href="http://www.raggmunkar.se/portfolio/admin/logout.php">Logga ut</a></button>
@@ -104,7 +104,6 @@
     </form>
     </article>
 
-    <!--------------------------PROJEKT------------------------------->
 
     <h2 id="toggle-projects" class="p-3 mt-3">Projekt</h2>
     <article id="projects-toggle">
@@ -148,11 +147,11 @@
     </form>
 
     </article>
-    
+
+<script src="js/main.js"></script>
+<script src="js/courses.js"></script>
+<script src="js/projects.js"></script>
+<script src="js/work.js"></script>
 
 </body>
-<script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript" src="js/courses.js"></script>
-<script type="text/javascript" src="js/projects.js"></script>
-<script type="text/javascript" src="js/work.js"></script>
 </html>
